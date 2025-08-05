@@ -1,3 +1,4 @@
+// frontend/vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -5,21 +6,11 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    // 代理 API 请求到本地运行的 Worker (默认端口 8787)
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:8787',
         changeOrigin: true,
       },
-    },
-  },
-  // 添加 PostCSS 配置，让 Vite 能够处理 Tailwind CSS
-  css: {
-    postcss: {
-      plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
-      ],
     },
   },
 });
